@@ -1,17 +1,22 @@
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-import React, { useState, useEffect } from "react";
+const ITEMS_API_URL = 'https://example.com/api/items';
+const DEBOUNCE_DELAY = 500;
 
-function App() {
+export default function Autocomplete(props) {
   const [searchText, setSearchText] = useState("");
+  const [list, setList] = useState([])
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      // aqui você pode enviar a requisição de busca com o valor de searchText
-      console.log(`Pesquisando por "${searchText}"...`);
-    }, 2000);
+    if (!searchText)
+      return setList([])
 
-    // limpa o timer anterior sempre que o usuário digita uma nova letra
+    const timer = setTimeout(() => {
+      document.getElementById('control').classList.add('is-loading')
+      fetchData(searchText)
+    }, DEBOUNCE_DELAY);
+
     return () => clearTimeout(timer);
   }, [searchText]);
 
@@ -19,12 +24,32 @@ function App() {
     setSearchText(event.target.value);
   };
 
+  const fetchData = async (text) => {
+    const result = await axios.get(ITEMS_API_URL, {
+      params: {
+        q: text
+      }
+    })
+
+    setList(result.data)
+    document.getElementById('control').classList.remove('is-loading')
+  }
+
   return (
-    <div>
-      <input type="text" value={searchText} onChange={handleSearchTextChange} />
-      <p>Esperando 2 segundos para pesquisar por "{searchText}"...</p>
+    <div className="wrapper">
+      <div className="control" id="control">
+        <input type="text" className="input" value={searchText} onChange={handleSearchTextChange} />
+      </div>
+      {list.length > 0 &&
+        <div className="list is-hoverable">
+          {list.length > 0 && list.map((item, index) => (
+            <a className="list-item" onClick={() => props.onSelectItem(item)} key={index}>
+              {item}
+            </a>
+          ))}
+        </div>
+      }
     </div>
   );
 }
 
-export default App;
