@@ -1,26 +1,26 @@
 import React, { useState } from "react";
-import "./index.css";
+import "./App.css";
 
 const InstructionItem = ({ index, text, moveInstruction, listLeng }) => {
   return (
     <li>
-      <div className="li-content layout-row justify-content-between align-items-center">
+      <div className="li-container">
         <span>{index + 1}</span>
         <span>{text}</span>
-        <div className="icons">
+        <div>
           <button
-            className="icon-only x-medium mx-2"
+            className="li-button"
             onClick={() => moveInstruction(index, "down")}
             disabled={index === listLeng - 1}
           >
-            <i className="material-icons">arrow_drop_down_icon</i>
+            <i>▼</i>
           </button>
           <button
-            className="icon-only x-medium mx-2"
+            className="li-button"
             onClick={() => moveInstruction(index, "up")}
             disabled={index === 0}
           >
-            <i className="material-icons">arrow_drop_up_icon</i>
+            <i>▲</i>
           </button>
         </div>
       </div>
@@ -31,19 +31,18 @@ const InstructionItem = ({ index, text, moveInstruction, listLeng }) => {
 const InstructionForm = ({ inputValue, onChange, onSubmit }) => {
   return (
     <form onSubmit={onSubmit}>
-      <section className="my-30 layout-row align-items-center justify-content-center width-1000">
+      <section>
         <input
           id="instruction-input"
           type="text"
           placeholder="New Instruction"
           data-testid="instruction-input"
-          className="width-80"
           value={inputValue}
           onChange={onChange}
         />
         <button
+          className="button-form"
           type="submit"
-          className="ml-30 width-20"
           data-testid="add-instruction-button"
         >
           Add Instruction
@@ -97,7 +96,7 @@ export default function InstructionBoard() {
   };
 
   return (
-    <div className="mt-50 layout-column justify-content-center align-items-center">
+    <div className="container">
       <div>
         <InstructionForm
           inputValue={inputValue}
@@ -105,13 +104,13 @@ export default function InstructionBoard() {
           onSubmit={addInstruction}
         />
         {showErr && (
-          <span data-testid="error-message" className="error hidden-span">
+          <span data-testid="error-message" className="error">
             {errMsg}
           </span>
         )}
       </div>
-      <div className="card outlined mt-0 width-800">
-        <div className="card-text">
+      <div>
+        <div>
           <h4>Instructions</h4>
           <ul className="styled mt-50" data-testid="instructions">
             {instructions.map((item, index) => (

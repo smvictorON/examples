@@ -1,0 +1,101 @@
+.container{
+  display: flex;
+  margin: 0 auto;
+  width: 80%;
+  flex-direction: column;
+  padding: 100px;
+}
+
+form{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+section{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+ul{
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  padding: 10px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+li {
+  width: 70%;
+  margin: 5px;
+}
+
+.li-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+}
+
+.li-container span:first-child{
+  font-weight: bold;
+}
+
+.li-button {
+  background-color: white;
+  color: green;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 30px;
+}
+
+.li-button:hover {
+  background-color: lightgreen;
+}
+
+.li-button:disabled {
+  background-color: #eee;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+
+.button-form {
+  background-color: #007bff;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 300px;
+}
+
+.button-form:hover {
+  background-color: #0056b3;
+}
+
+.error{
+  color: red;
+  font-weight: bold;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  margin-right: 10px;
+}
